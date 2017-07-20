@@ -463,8 +463,8 @@ ${helpers.predefined_type("object-position",
         fn parse<'i, 't>(_context: &ParserContext, input: &mut Parser<'i, 't>)
                          -> Result<Self, ParseError<'i>> {
             let mut strings = vec![];
-            while let Ok(string) = input.try(|i| i.expect_string_cloned()) {
-                strings.push(string.into_owned().into_boxed_str());
+            while let Ok(string) = input.try(|i| i.expect_string().map(|s| s.as_ref().into())) {
+                strings.push(string);
             }
 
             TemplateAreas::from_vec(strings)

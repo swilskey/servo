@@ -51,7 +51,7 @@ enum ErrorString<'a> {
 impl<'a> ErrorString<'a> {
     fn into_str(self) -> String {
         match self {
-            ErrorString::Snippet(s) => s.into_owned(),
+            ErrorString::Snippet(s) => s.as_ref().to_owned(),
             ErrorString::Ident(i) => escape_css_ident(&i),
             ErrorString::UnexpectedToken(t) => token_to_str(t),
         }

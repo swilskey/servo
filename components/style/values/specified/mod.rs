@@ -82,7 +82,7 @@ pub use ::gecko::url::*;
 impl Parse for SpecifiedUrl {
     fn parse<'i, 't>(context: &ParserContext, input: &mut Parser<'i, 't>) -> Result<Self, ParseError<'i>> {
         let url = input.expect_url()?;
-        Self::parse_from_string(url.into_owned(), context)
+        Self::parse_from_string(url.as_ref().to_owned(), context)
     }
 }
 
@@ -969,7 +969,7 @@ impl Attr {
         if let Some(first) = first {
             Ok(Attr {
                 namespace: None,
-                attribute: first.into_owned(),
+                attribute: first.as_ref().to_owned(),
             })
         } else {
             Err(StyleParseError::UnspecifiedError.into())

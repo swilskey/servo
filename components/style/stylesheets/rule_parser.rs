@@ -155,7 +155,7 @@ impl<'a, 'i> AtRuleParser<'i> for TopLevelRuleParser<'a> {
                 }
 
                 self.state = State::Imports;
-                let url_string = input.expect_url_or_string()?.into_owned();
+                let url_string = input.expect_url_or_string()?.as_ref().to_owned();
                 let specified_url = SpecifiedUrl::parse_from_string(url_string, &self.context)?;
 
                 let media = parse_media_query_list(&self.context, input);
